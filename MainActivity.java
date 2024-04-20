@@ -1,54 +1,32 @@
-package com.example.fragments;
+package com.example.player;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button firstFragmentBtn, secondFragmentBtn;
-
+    MediaPlayer mysoundbeliever;
+    MediaPlayer mysoundblinding;
+    public void play(View view)
+    {
+        mysoundbeliever.start();
+    }
+    public void pause(View view){
+        mysoundbeliever.pause();
+    }
+    public void nextsong(View view){
+        mysoundbeliever.stop();
+        mysoundblinding.start();
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        firstFragmentBtn = findViewById(R.id.fragment1btn);
-        secondFragmentBtn = findViewById(R.id.fragment2btn);
-
-        firstFragmentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                replaceFragment(new fragment1());
-
-            }
-        });
-
-        secondFragmentBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                replaceFragment(new fragment2());
-
-            }
-        });
-
-
-
-
+        mysoundbeliever = MediaPlayer.create(this,R.raw.believer);
+        mysoundblinding = MediaPlayer.create(this,R.raw.blindinglights);
     }
 
-    private void replaceFragment(Fragment fragment) {
-
-        FragmentManager fragmentManager = getSupportFragmentManager();
-        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.frameLayout,fragment);
-        fragmentTransaction.commit();
-
-    }
 }
