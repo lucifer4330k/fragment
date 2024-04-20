@@ -1,32 +1,25 @@
-package com.example.player;
+package com.example.myapplicationlistview;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
 
 public class MainActivity extends AppCompatActivity {
 
-    MediaPlayer mysoundbeliever;
-    MediaPlayer mysoundblinding;
-    public void play(View view)
-    {
-        mysoundbeliever.start();
-    }
-    public void pause(View view){
-        mysoundbeliever.pause();
-    }
-    public void nextsong(View view){
-        mysoundbeliever.stop();
-        mysoundblinding.start();
-    }
+    String arr[]={"A","b","D","E","F"};
+    ListView listview;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mysoundbeliever = MediaPlayer.create(this,R.raw.believer);
-        mysoundblinding = MediaPlayer.create(this,R.raw.blindinglights);
-    }
 
+        listview=findViewById(R.id.listview);
+        ArrayAdapter<String> arrayAdapter = new ArrayAdapter<String>(this,R.layout.activity_list_view,R.id.b,arr);
+        listview.setAdapter(arrayAdapter);
+
+
+    }
 }
